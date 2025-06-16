@@ -1,13 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Pokemon</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <link
+      rel="icon"
+      href="https://assets.pokemon.com/assets/cms2/img/misc/gus/buttons/logo-pokemon-79x45.png"
+      type="image/x-icon"
+    />
+    <meta
+      name="description"
+      content="A page dedicated to Pokemon information."
+    />
+    <meta name="keywords" content="Pokemon, Pokedex, Pokemon information" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <h1>Welcome to the universe of Pokemon</h1>
+    <p class="description">
+      Come on and pick your favourite pokemon :) 
+    </p>
+    <div class="search-wrapper">
+      <div class="search-container">
+        <input
+          type="text"
+          id="pokemon-input"
+          placeholder="Search Pokémon..."
+          autocomplete="off"
+        />
+        <button id="fetch-button">Fetch your Pokemon</button>
+      </div>
+      <ul id="suggestions"></ul>
+    </div>
+
+    <div id="pokemon-details"></div>
   </body>
 </html>

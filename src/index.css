@@ -46,6 +46,21 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+.box-container {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.empty-box {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #888;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
 button:hover {
   border-color: #646cff;
 }
