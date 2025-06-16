@@ -1,11 +1,9 @@
-import { useState, useEffect}from "react";
-import type{ChangeEvent, KeyboardEvent } from "react";
-import "./index.css";
+import { useState, useEffect} from "react";
+import type { ChangeEvent } from "react";
+import "./App.css";
 
 type PokemonType = {
-  type: {
-    name: string;
-  };
+  type: { name: string };
 };
 
 type PokemonData = {
@@ -13,17 +11,11 @@ type PokemonData = {
   height: number;
   weight: number;
   base_experience: number;
-  sprites: {
-    other: {
-      ["official-artwork"]: {
-        front_default: string;
-      };
-    };
-  };
+  sprites: { other: { ["official-artwork"]: { front_default: string } } };
   types: PokemonType[];
 };
 
-const TYPE_COLORS: Record<string, string> = {
+const typeColors: Record<string, string> = {
   fire: "#F08030",
   water: "#6890F0",
   grass: "#78C850",
@@ -44,113 +36,107 @@ const TYPE_COLORS: Record<string, string> = {
   steel: "#B8B8D0",
 };
 
-const PokemonPage: React.FC = () => {
-  const [input, setInput] = useState<string>("");
+const App: React.FC = () => {
+  const [allPokemonNames, setAllPokemonNames] = useState<string[]>([]);
+  const [input, setInput] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [pokemon, setPokemon] = useState<PokemonData | null>(null);
-  const [error, setError] = useState<string>("");
-  const [allNames, setAllNames] = useState<string[]>([]);
+  const [error, setError] = useState("");
 
-  
   useEffect(() => {
-    const fetchNames = async () => {
+    const fetchAllPokemonNames = async () => {
       try {
         const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1300");
+        if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
         const data = await res.json();
-        setAllNames(data.results.map((p: { name: string }) => p.name));
-      } catch (error) {
-        console.error("Failed to fetch names:", error);
+        setAllPokemonNames(data.results.map((p: { name: string }) => p.name));
+      } catch {
+        setError("Failed to fetch Pokémon names.");
       }
     };
-    fetchNames();
+    fetchAllPokemonNames();
   }, []);
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
     setInput(value);
     setError("");
+    setPokemon(null);
 
-    if (value.length > 0) {
-      const matches = allNames
-        .filter(name => name.includes(value))
-        .slice(0, 5);
-      setSuggestions(matches);
-    } else {
+    if (value.length === 0) {
+      setSuggestions([]);
+      return;
+    }
+    const matches = allPokemonNames
+      .filter((name) => name.includes(value))
+      .slice(0, 5);
+    setSuggestions(matches);
+  };
+
+  const fetchPokemon = async (name: string) => {
+    if (!allPokemonNames.includes(name.toLowerCase())) {
+      setError("Pokémon not found!");
+      setPokemon(null);
+      setSuggestions([]);
+      return;
+    }
+    try {
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+      if (!res.ok) throw new Error("Pokémon not found!");
+      const data: PokemonData = await res.json();
+      setPokemon(data);
+      setError("");
+      setSuggestions([]);
+    } catch {
+      setError("Pokémon not found!");
+      setPokemon(null);
       setSuggestions([]);
     }
   };
 
-  const fetchPokemon = async (name: string) => {
-    if (!allNames.includes(name.toLowerCase())) {
-      setError("Pokémon not found!");
-      setPokemon(null);
-      return;
-    }
-
-    try {
-      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      if (!res.ok) throw new Error("Not found");
-      const data: PokemonData = await res.json();
-      setPokemon(data);
-      setError("");
-    } catch (error) {
-      
-      console.error("Failed to fetch Pokémon data:", error);
-      setError("Failed to fetch Pokémon data");
-      setPokemon(null);
-    }
-  };
-
-  const handleSuggestion = (name: string) => {
+  const handleSuggestionClick = (name: string) => {
     setInput(name);
-    setSuggestions([]);
     fetchPokemon(name);
   };
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") fetchPokemon(input);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      fetchPokemon(input);
+    }
   };
 
   return (
-    <div className="pokemon-app">
-      <h1>Poke Poke Pokemonnnnnn :) </h1>
+    <div>
+      <h1>Welcome to the Pokemon Page</h1>
+      <p className="description">
+        Here you can find information about your favorite Pokemon!
+      </p>
       <div className="search-wrapper">
         <div className="search-container">
           <input
+            type="text"
             value={input}
             onChange={handleInput}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
             placeholder="Search Pokémon..."
             autoComplete="off"
           />
-          <button onClick={() => fetchPokemon(input)}>Search</button>
+          <button onClick={() => fetchPokemon(input)}>Fetch Pokemon</button>
         </div>
         {suggestions.length > 0 && (
           <ul className="suggestions">
-            {suggestions.map(name => (
-              <li key={name} onClick={() => handleSuggestion(name)}>
+            {suggestions.map((name) => (
+              <li key={name} onClick={() => handleSuggestionClick(name)}>
                 {name}
               </li>
             ))}
           </ul>
         )}
       </div>
-
-      {error && <p className="error">{error}</p>}
-
+      {error && <div className="error">{error}</div>}
       {pokemon && (
-        <div
-          className="pokemon-card"
-          style={{
-            borderColor: TYPE_COLORS[pokemon.types[0].type.name] || "#28a745"
-          }}
-        >
-          <h2
-            style={{
-              backgroundColor:
-                TYPE_COLORS[pokemon.types[0].type.name] || "#28a745"
-            }}
-          >
+        <div className="pokemon-details" style={{ borderColor: typeColors[pokemon.types[0].type.name] || "#28a745" }}>
+          <h2 style={{ backgroundColor: typeColors[pokemon.types[0].type.name] || "#28a745" }}>
             {pokemon.name.toUpperCase()}
           </h2>
           <div className="sprite-box">
@@ -159,25 +145,16 @@ const PokemonPage: React.FC = () => {
               alt={pokemon.name}
             />
           </div>
-          <div className="stats">
-            <p>
-              <strong>Height:</strong> {pokemon.height / 10}m
-            </p>
-            <p>
-              <strong>Weight:</strong> {pokemon.weight / 10}kg
-            </p>
-            <p>
-              <strong>Base Exp:</strong> {pokemon.base_experience}
-            </p>
-            <p>
-              <strong>Types:</strong>{" "}
-              {pokemon.types.map(t => t.type.name).join(", ")}
-            </p>
-          </div>
+          <p><strong>Height:</strong> {pokemon.height}</p>
+          <p><strong>Weight:</strong> {pokemon.weight}</p>
+          <p><strong>Base Exp:</strong> {pokemon.base_experience}</p>
+          <p>
+            <strong>Types:</strong> {pokemon.types.map((t) => t.type.name).join(", ")}
+          </p>
         </div>
       )}
     </div>
   );
 };
 
-export default PokemonPage;
+export default App;
