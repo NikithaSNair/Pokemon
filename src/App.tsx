@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; // Combined React imports, including useRef
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import axios from 'axios'; // Ensure axios is imported once
 
 import './App.css';
 
-import type { PokemonData, BasicPokemonData } from './types';
+import type { PokemonData } from './types';
+import type { BasicPokemonData } from './types';
 import { fetchPokemonDetails, fetchPaginatedPokemonList, fetchAllPokemonNames } from './api';
 
 import SearchBar from './components/SearchBar';
 import SearchedPokemonDetails from './components/SearchedPokemonDetails';
 import PokemonTeam from './components/PokemonTeam';
+// import PokemonStatsDisplay from './components/PokemonStatsDisplay'; // Still removed as requested
 import AllPokemonsGrid from './components/AllPokemonsGrid';
 import DragStatusBox from './components/DragStatusBox';
 import TeamStatsSummary from './components/TeamStatsSummary';
@@ -261,7 +263,8 @@ function App() {
                         handleTeamSlotClick={handleTeamSlotClick}
                         handleRemoveFromTeam={handleRemoveFromTeam}
                     />
-                    
+                    {/* PokemonStatsDisplay component removed as requested */}
+                    {/* <PokemonStatsDisplay pokemonTeam={pokemonTeam} /> */}
                     <TeamStatsSummary teamTotalStats={teamTotalStats} />
                 </div>
 
