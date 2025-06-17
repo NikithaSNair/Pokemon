@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'; // Combined React imports, including useRef
+import React, { useState, useEffect } from 'react'; 
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios'; // Ensure axios is imported once
+import axios from 'axios'; 
 
 import './App.css';
 
@@ -11,7 +11,7 @@ import { fetchPokemonDetails, fetchPaginatedPokemonList, fetchAllPokemonNames } 
 import SearchBar from './components/SearchBar';
 import SearchedPokemonDetails from './components/SearchedPokemonDetails';
 import PokemonTeam from './components/PokemonTeam';
-// import PokemonStatsDisplay from './components/PokemonStatsDisplay'; // Still removed as requested
+
 import AllPokemonsGrid from './components/AllPokemonsGrid';
 import DragStatusBox from './components/DragStatusBox';
 import TeamStatsSummary from './components/TeamStatsSummary';
@@ -230,7 +230,7 @@ function App() {
             <div className="main-header-section">
                 <h1>Welcome to the Universe of Pokemon</h1>
                 <p className="description">
-                    Here you can find information about your favorite Pokemon, build your team, and view their stats!
+                                     Choose your favorite Pokemon, build your team, and view their stats!
                 </p>
             </div>
 
@@ -263,8 +263,7 @@ function App() {
                         handleTeamSlotClick={handleTeamSlotClick}
                         handleRemoveFromTeam={handleRemoveFromTeam}
                     />
-                    {/* PokemonStatsDisplay component removed as requested */}
-                    {/* <PokemonStatsDisplay pokemonTeam={pokemonTeam} /> */}
+                    
                     <TeamStatsSummary teamTotalStats={teamTotalStats} />
                 </div>
 

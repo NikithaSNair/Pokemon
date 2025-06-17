@@ -37,7 +37,7 @@ const PokemonTeam: React.FC<PokemonTeamProps> = ({
                 <button className="remove-btn" onClick={(e) => { e.stopPropagation(); handleRemoveFromTeam(index); }}>&times;</button>
               </>
             ) : (
-              <span>Drop your Pokémon Here!</span>
+              <span>Drop me Here!</span>
             )}
           </div>
         ))}
