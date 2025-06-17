@@ -1,16 +1,16 @@
-/* src/App.css */
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    /* Set the GIF as background for the entire page */
+    
     background-image: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWh3MjdwNXJibjF6ZHI0aDFqejg0bGp3dHJuejVma3lvM2tsaGp1ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lfkF4K2OHetzCrL46J/giphy.gif');
-    background-size: cover; /* Ensures the background covers the entire element */
-    background-position: center; /* Centers the background image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-attachment: fixed; /* Keeps the background fixed while scrolling */
-    background-color: #212121; /* Fallback solid color for when GIF might not load or for initial load */
-    font-family: 'Inter', sans-serif; /* Ensuring Inter font is applied globally */
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-color: #212121; 
+    font-family: 'Inter', sans-serif; 
 }
 
 .App {
@@ -45,8 +45,7 @@ html, body {
     max-width: 900px;
     width: 100%;
     margin-bottom: 0;
-    background-color: transparent; /* Keep background transparent to see GIF */
-    color: inherit;
+    background-color: transparent;
 }
 
 .centered-search-area {
@@ -60,7 +59,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    background-color: transparent; /* Keep background transparent to see GIF */
+    background-color: transparent; 
     color: inherit;
 }
 
@@ -72,7 +71,7 @@ html, body {
     justify-content: center;
     align-content: start;
     margin-top: 0;
-    background-color: transparent; /* Keep background transparent to see GIF */
+    background-color: transparent; 
     color: inherit;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -96,7 +95,7 @@ html, body {
     width: 100%;
     max-width: 380px;
     justify-self: center;
-    background-color: transparent; /* Keep background transparent to see GIF */
+    background-color: transparent; 
     color: inherit;
 }
 
@@ -109,11 +108,11 @@ html, body {
     width: 100%;
     max-width: 100%;
     justify-self: center;
-    background-color: transparent; /* Keep background transparent to see GIF */
+    background-color: transparent;
     color: inherit;
 }
 
-/* Common styling for all major component containers */
+
 .pokemon-team-section,
 .team-members-stats-container,
 .team-stats-summary-container,
@@ -123,7 +122,7 @@ html, body {
 .all-pokemons-section {
     padding: 25px;
     border-radius: 15px;
-    background-color: #e1d7d700; /* Maintain dark background for internal boxes */
+    background-color: #e1d7d700; 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     text-align: center;
     color: #e0e0e0;
@@ -154,7 +153,7 @@ h1 {
     align-items: center;
     padding: 20px;
     margin-top: 0;
-    background-color: #2a2a2a; /* Ensure search wrapper has its own background */
+    background-color: #2a2a2a; 
 }
 .search-container {
     display: flex;
@@ -217,7 +216,7 @@ input[type="text"]:focus {
 #searched-pokemon-details {
     max-width: 250px;
     margin: 0 auto;
-    background-color: #2a2a2a; /* Ensure it has its own dark background */
+    background-color: #2a2a2a; 
 }
 
 #searched-pokemon-details h2 {
