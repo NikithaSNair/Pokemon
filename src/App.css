@@ -1,16 +1,15 @@
-
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    
-    background-image: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWh3MjdwNXJibjF6ZHI0aDFqejg0bGp3dHJuejVma3lvM2tsaGp1ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lfkF4K2OHetzCrL46J/giphy.gif');
-    background-size: cover; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; 
+    background-image: url('https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZG45d2xnNWFrdHpmbGFvZGw1ODM4N3k4dXAyN25ibWRkdW0yaXMxciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lfkF4K2OHetzCrL46J/giphy.gif');
+    background-size: cover, cover;
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
     background-color: #212121; 
-    font-family: 'Inter', sans-serif; 
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden; 
 }
 
 .App {
@@ -46,6 +45,7 @@ html, body {
     width: 100%;
     margin-bottom: 0;
     background-color: transparent;
+    color: inherit; 
 }
 
 .centered-search-area {
@@ -59,7 +59,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    background-color: transparent; 
+    background-color: transparent;
     color: inherit;
 }
 
@@ -71,7 +71,7 @@ html, body {
     justify-content: center;
     align-content: start;
     margin-top: 0;
-    background-color: transparent; 
+    background-color: transparent;
     color: inherit;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -95,7 +95,7 @@ html, body {
     width: 100%;
     max-width: 380px;
     justify-self: center;
-    background-color: transparent; 
+    background-color: transparent;
     color: inherit;
 }
 
@@ -112,17 +112,16 @@ html, body {
     color: inherit;
 }
 
-
 .pokemon-team-section,
 .team-members-stats-container,
 .team-stats-summary-container,
 .search-wrapper,
-#searched-pokemon-details,
+#searched-pokemon-details, 
 .drag-status-box,
 .all-pokemons-section {
     padding: 25px;
     border-radius: 15px;
-    background-color: #e1d7d700; 
+    background-color: rgba(42, 42, 42, 0.9);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     text-align: center;
     color: #e0e0e0;
@@ -133,7 +132,7 @@ html, body {
 h1 {
     margin: 0 0 10px 0;
     font-size: 2.5em;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0); 
     color: #f0f0f0;
 }
 
@@ -153,7 +152,7 @@ h1 {
     align-items: center;
     padding: 20px;
     margin-top: 0;
-    background-color: #2a2a2a; 
+    
 }
 .search-container {
     display: flex;
@@ -164,7 +163,7 @@ h1 {
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
-input[type="text"] {
+.pokemon-input {
     flex: 1;
     padding: 15px;
     border: none;
@@ -172,26 +171,29 @@ input[type="text"] {
     background-color: #333333;
     color: #e0e0e0;
 }
-button {
+.fetch-button { 
     border-radius: 0 8px 8px 0;
     border: none;
     background-color: #4CAF50;
     color: white;
+    padding: 15px; 
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
 }
-button:hover {
+.fetch-button:hover {
     background-color: #45a049;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
-input[type="text"]:focus {
+.pokemon-input:focus {
     box-shadow: inset 0 0 0 2px #4CAF50;
 }
-#suggestions {
+.suggestions-list { 
     position: absolute;
     top: calc(100% + 5px);
     left: 0;
     right: 0;
     width: 100%;
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.95);
     border-radius: 8px;
     max-height: 200px;
     z-index: 1000;
@@ -201,22 +203,20 @@ input[type="text"]:focus {
     overflow-y: auto;
     border: 1px solid #555;
 }
-#suggestions li:nth-child(odd) { background-color: #333; }
-#suggestions li:nth-child(even) { background-color: #3a3a3a; }
-#suggestions li {
+.suggestions-list li:nth-child(odd) { background-color: rgba(51, 51, 51, 0.95); }
+.suggestions-list li:nth-child(even) { background-color: rgba(58, 58, 58, 0.95); }
+.suggestion-item { 
     padding: 10px 15px;
     cursor: pointer;
     border-bottom: 1px solid #444;
     color: #e0e0e0;
 }
-#suggestions li:last-child { border-bottom: none; }
-#suggestions li:hover { background-color: #555; }
-
+.suggestion-item:last-child { border-bottom: none; }
+.suggestion-item:hover { background-color: #555; }
 
 #searched-pokemon-details {
-    max-width: 250px;
     margin: 0 auto;
-    background-color: #2a2a2a; 
+    
 }
 
 #searched-pokemon-details h2 {
@@ -270,7 +270,6 @@ input[type="text"]:focus {
     border-bottom: none;
     padding-bottom: 0;
 }
-
 
 .pokemon-team-section h2 {
     font-size: 1.8em;
@@ -328,7 +327,7 @@ input[type="text"]:focus {
     transform: scale(1.03);
 }
 
-.pokemon-card.dragging {
+.pokemon-card.dragging { 
     opacity: 0.4;
     transform: scale(0.95);
 }
@@ -465,11 +464,36 @@ input[type="text"]:focus {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     cursor: grab;
+    -webkit-user-drag: element; 
+    user-drag: element;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .pokemon-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-card.in-team {
+    opacity: 0.6;
+    cursor: not-allowed;
+    border-color: #999;
+    background-color: #4a4a4a;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.pokemon-card * { 
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .pokemon-card img {
@@ -665,7 +689,7 @@ input[type="text"]:focus {
     .description {
         font-size: 1em;
     }
-    .search-container, #suggestions {
+    .search-container, .suggestions-list { 
         width: 90%;
         max-width: none;
     }
@@ -706,14 +730,14 @@ input[type="text"]:focus {
         flex-direction: column;
         align-items: stretch;
     }
-    input[type="text"] {
+    .pokemon-input { 
         border-radius: 8px 8px 0 0;
         margin-bottom: -1px;
     }
-    button {
+    .fetch-button { 
         border-radius: 0 0 8px 8px;
     }
-    #suggestions {
+    .suggestions-list {
         width: 90%;
         max-width: none;
     }

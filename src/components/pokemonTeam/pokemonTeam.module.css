@@ -1,0 +1,112 @@
+.pokemonTeamSection h2 {
+    font-size: 1.8em;
+    color: #f0f0f0;
+    margin-bottom: 20px;
+}
+
+.pokemonTeamSlots { 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.teamSlot { 
+    background-color: #333;
+    border: 2px dashed #777;
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    color: #a0a0a0;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    cursor: pointer;
+}
+
+.teamSlot.occupied { 
+    border: 2px solid #4CAF50;
+    background-color: #213c21;
+    color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.teamSlot img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.teamSlot span {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.removeBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.removeBtn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.teamSlot.dragOver {
+    background-color: #3a5e3a;
+    border-color: #327a36;
+    transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    .pokemonTeamSlots {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .pokemonTeamSection {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    .teamSlot {
+        min-height: 100px;
+    }
+    .teamSlot img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pokemonTeamSlots {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .teamSlot {
+        min-height: 90px;
+    }
+    .teamSlot img {
+        width: 60px;
+        height: 60px;
+    }
+    .pokemonTeamSection h2 {
+        font-size: 1.5em;
+    }
+}

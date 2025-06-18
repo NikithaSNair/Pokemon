@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import type { BasicPokemonData, PokemonData } from '../types'; 
+import type { BasicPokemonData, PokemonData } from '../../types'; 
 
 interface SearchBarProps {
   pokemonInput: string;

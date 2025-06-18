@@ -1,4 +1,4 @@
-import type { PokemonData} from '../types'; 
+import type { PokemonData} from '../../types'; 
 
 interface PokemonTeamProps {
   pokemonTeam: Array<PokemonData | null>;
